@@ -11,7 +11,7 @@ fi
 ## scan host with nmap
 printf "\n----- NMAP -----\n\n" > results
 echo "Running Nmap..."
-nmap -sC -sV $1 | tail -n +5 | head -n -3 >> results
+nmap -sC -sV -p- $1 | tail -n +5 | head -n -3 >> results
 
 
 ## enumerate http
@@ -20,7 +20,7 @@ do
         if [[ $line == *open* ]] && [[ $line == *http* ]]
         then
                 echo "Running Gobuster..."
-                gobuster dir -u $1 -w /home/taj702/Desktop/wordlists/web-enumeration/common-dirs.txt -qz > temp1
+                gobuster dir -w common-dirs.txt -qz -u $1 > temp1
 
         echo "Running WhatWeb..."
         whatweb $1 -v > temp2
@@ -44,7 +44,7 @@ then
 fi
 
 echo results
-cat results > results.txt
+cat results > /home/taj702/auto-recon-data/results.txt
 
 
 
