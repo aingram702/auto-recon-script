@@ -9,7 +9,7 @@ fi
 
 
 ## scan host with nmap
-printf "\n----- NMAP -----\n\n" > results
+printf "\n--------------- NMAP-ALL-Ports ---------------\n\n" > results
 echo "Running Nmap..."
 nmap -sC -sV -p- $1 | tail -n +5 | head -n -3 >> results
 
@@ -31,20 +31,20 @@ done < results
 ## display results
 if [ -e temp1 ]
 then
-        printf "\n----- DIRS -----\n\n" >> results
+        printf "\n--------------- GoBuster-Common-Dirs ---------------\n\n" >> results
         cat temp1 >> results
         rm temp1
 fi
 
 if [ -e temp2 ]
 then
-    printf "\n----- WEB -----\n\n" >> results
+    printf "\n--------------- WhatWEB ---------------\n\n" >> results
         cat temp2 >> results
         rm temp2
 fi
 
 echo results
-cat results > /home/taj702/auto-recon-data/results.txt
+cat results > ${1}results.txt
 
 
 
